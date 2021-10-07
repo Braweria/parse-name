@@ -5,7 +5,8 @@
   "author": "Wiktoria Mielcarek <w.mielcarek@braweria.de> (http://github.com/braweria/)",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "ts-node-dev --respawn lib/parse-name.ts"
   },
   "keywords": [
     "parse",
@@ -29,6 +30,7 @@
     "eslint": "^7.32.0",
     "eslint-config-galex": "^2.16.13",
     "ts-node": "^10.2.1",
+    "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.3"
   }
 }
