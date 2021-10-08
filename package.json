@@ -1,12 +1,13 @@
 {
-  "name": "parse-name",
+  "name": "full-name-parser",
   "version": "1.0.0",
   "description": "Parse names into categories.",
   "author": "Wiktoria Mielcarek <w.mielcarek@braweria.de> (http://github.com/braweria/)",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "ts-node-dev --respawn lib/parse-name.ts"
+    "start": "ts-node-dev --respawn lib/parse-name.ts",
+    "tsc": "tsc"
   },
   "keywords": [
     "parse",
@@ -15,7 +16,11 @@
     "parser",
     "parse",
     "parser",
-    "name"
+    "name",
+    "name-parser",
+    "full-name-parser",
+    "parse-name",
+    "parse-full-name"
   ],
   "bugs": {
     "url": "https://github.com/Braweria/parse-name/issues"
