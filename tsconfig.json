@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "rootDir": "lib",
+    "outDir": "dist"
+  },
+  "exclude": [
+    "node_modules", "jest.config.ts", "test/parse-name.test.ts"
+  ]
+}
