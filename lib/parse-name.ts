@@ -8,10 +8,7 @@ export function parseName(fullname: string): Person {
   [prefix, chopped] = findNeedleInHaystack(prefixes, chopped);
   [infix, chopped] = findNeedleInHaystack(infixes, chopped);
   [suffix, chopped] = findNeedleInHaystack(suffixes, chopped);
-  [first, chopped] = findName("first", chopped);
-  // [middle, chopped] = findName("middle", chopped);
-  // [initials, chopped] = findName("initials", chopped, first, middle);
-  // [last, chopped] = findName("last", chopped);
+  [first, middle, initials, last, chopped] = findName(chopped);
 
   const parsedName: Person = {
     prefix,
@@ -24,7 +21,6 @@ export function parseName(fullname: string): Person {
     full: original,
   };
 
-  // console.log(parsedName);
   return parsedName;
 }
 
@@ -57,7 +53,7 @@ const findNeedleInHaystack = (
 
   let found = false;
   let i = 0;
-  let result = "";
+  let result = null;
   let chopped = haystack;
 
   while (found === false) {
@@ -67,14 +63,19 @@ const findNeedleInHaystack = (
       break;
     }
 
+    const wordLength = sortedNeedles[i].length;
+
     for (let a = 0; a < haystack.length; a++) {
-      if (
-        haystack.substr(a, sortedNeedles[i].length).toLowerCase() ===
-        sortedNeedles[i]
-      ) {
-        result = haystack.substr(a, sortedNeedles[i].length);
-        found = true;
-        chopped = removeSpaces(haystack.replace(result, ""));
+      if (haystack.substr(a, wordLength).toLowerCase() === sortedNeedles[i]) {
+        if (
+          haystack[a - 1] === " " ||
+          (haystack[a - 1] === undefined && haystack[wordLength] === " ") ||
+          haystack[wordLength] === undefined
+        ) {
+          result = haystack.substr(a, wordLength);
+          found = true;
+          chopped = removeSpaces(haystack.replace(result, ""));
+        }
         break;
       }
     }
@@ -84,59 +85,40 @@ const findNeedleInHaystack = (
   return [result, chopped];
 };
 
-const findName = (
-  type: string,
-  haystack: string,
-  firstName?: string,
-  middleName?: string
-) => {
-  let result = null;
+const findName = (haystack: string) => {
   let chopped = haystack;
-  const firstInital = firstName ? firstName.substr(0, 1) : "";
-  const middleInital = middleName ? middleName.substr(0, 1) : "";
   const initialsRegex = /(\S\.\s{0,1})+/u;
 
-  // if (type === "first") {
-  //   [result] = haystack.split(" ");
-  //   chopped = removeSpaces(haystack.replace(result, ""));
-  // }
-  // if (type === "initials") {
-  //   const initialsRegex = /(\S\.\s{0,1})+/u;
-  //   const matches = haystack.match(initialsRegex);
-  //   if (matches) {
-  //     result = removeSpaces(matches[0]);
-  //     chopped = removeSpaces(haystack.replace(result, ""));
-  //   }
-  //   console.log(result);
-  // }
-  // if (type === "middle") {
-  //   //
-  // }
-  // if (type === "last") {
-  //   //
-  // }
-
-  let initials = "";
-  let first = "";
-  let middle = "";
-  let last = "";
+  let initials = null;
+  let first = null;
+  let middle = null;
+  let last = null;
 
   haystack.split(" ").forEach((hay, i, all) => {
     const len = all.length - 1;
     if (i === len) {
+      console.log(hay);
       last = hay;
-    }
-    console.log(hay.match(initialsRegex));
-  });
+      chopped = removeSpaces(chopped.replace(hay, ""));
 
-  return [result, chopped];
+      if (chopped) {
+        console.warn(
+          "Warning: Person has more than two names. Additional names are not supported. The following is still left from the name:",
+          chopped
+        );
+      }
+    } else if (initialsRegex.test(hay)) {
+      initials = hay;
+      chopped = removeSpaces(chopped.replace(hay, ""));
+    } else if (!first) {
+      first = hay;
+      chopped = removeSpaces(chopped.replace(hay, ""));
+    } else if (!middle) {
+      middle = hay;
+      chopped = removeSpaces(chopped.replace(hay, ""));
+    }
+  });
+  return [first, middle, initials, last, chopped];
 };
 
 const removeSpaces = (str: string) => str.trim().replace("  ", " ");
-
-parseName("Frau Maria Höfer");
-parseName("Mr. Raphael A. van der Börk, II");
-parseName("Steph van der Börk");
-parseName("Steph Alice van der Börk snr");
-parseName("Prof. Eric C. B. Meyer");
-parseName("Z. Rüdiger Müller");
