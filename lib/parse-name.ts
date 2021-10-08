@@ -97,7 +97,6 @@ const findName = (haystack: string) => {
   haystack.split(" ").forEach((hay, i, all) => {
     const len = all.length - 1;
     if (i === len) {
-      console.log(hay);
       last = hay;
       chopped = removeSpaces(chopped.replace(hay, ""));
 
