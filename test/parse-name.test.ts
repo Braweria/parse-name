@@ -27,27 +27,27 @@ test("parse full name", () => {
 });
 
 test("parse full name", () => {
-  expect(parseName("Dr. Raphael M. van der Börk II")).toEqual({
+  expect(parseName("Dr. Raphael M. van der Börk")).toEqual({
     prefix: "Dr.",
     first: "Raphael",
     middle: null,
     initials: "M.",
     infix: "van der",
     last: "Börk",
-    suffix: "II",
+    suffix: null,
     full: "Dr. Raphael M. van der Börk II",
   });
 });
 
 test("parse full name", () => {
-  expect(parseName("Prof. Steph Alice von Wolfenstein")).toEqual({
+  expect(parseName("Prof. Steph Alice von Wolfenstein, III")).toEqual({
     prefix: "Prof.",
     first: "Steph",
     middle: "Alice",
     initials: null,
     infix: "von",
     last: "Wolfenstein",
-    suffix: null,
+    suffix: "III",
     full: "Prof. Steph Alice von Wolfenstein",
   });
 });
