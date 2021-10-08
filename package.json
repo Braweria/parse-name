@@ -17,11 +17,13 @@
     "parser",
     "name"
   ],
-  "license": "ISC",
-  "dependencies": {
-    "jest": "^27.2.4"
+  "bugs": {
+    "url": "https://github.com/Braweria/parse-name/issues"
   },
+  "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
+    "jest": "^27.2.4",
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
