@@ -4,7 +4,7 @@ export function parseName(fullname: string): Person {
   const original = fullname;
   let prefix, first, initials, middle, infix, last, suffix;
 
-  let chopped = fullname;
+  let chopped: string | null = fullname;
   [prefix, chopped] = findNeedleInHaystack(prefixes, chopped);
   [infix, chopped] = findNeedleInHaystack(infixes, chopped);
   [suffix, chopped] = findNeedleInHaystack(suffixes, chopped);
@@ -47,9 +47,13 @@ const sorting = (a: string, b: string) => {
 
 const findNeedleInHaystack = (
   needles: typeof prefixes[number][],
-  haystack: string
+  haystack: string | null
 ) => {
   const sortedNeedles = needles.sort(sorting);
+
+  if (!haystack) {
+    return [null, haystack];
+  }
 
   let found = false;
   let i = 0;
@@ -85,16 +89,24 @@ const findNeedleInHaystack = (
   return [result, chopped];
 };
 
-const findName = (haystack: string) => {
+const findName = (haystack: string | null) => {
   let chopped = haystack;
   const initialsRegex = /(\S\.\s{0,1})+/u;
 
-  let initials = null;
-  let first = null;
-  let middle = null;
-  let last = null;
+  let initials: string | null = null;
+  let first: string | null = null;
+  let middle: string | null = null;
+  let last: string | null = null;
+
+  if (chopped === null || haystack === null) {
+    return [first, middle, initials, last, chopped];
+  }
 
   haystack.split(" ").forEach((hay, i, all) => {
+    if (chopped === null) {
+      return;
+    }
+
     const len = all.length - 1;
     if (i === len) {
       last = hay;
