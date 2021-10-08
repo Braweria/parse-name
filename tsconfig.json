@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "rootDir": "lib",
-    "outDir": "dist"
+    "outDir": "dist",
+    "strict": true,
+    "target": "es5"
   },
   "exclude": [
     "node_modules", "jest.config.ts", "test/parse-name.test.ts"
