@@ -66,3 +66,16 @@ test("parse full name", () => {
     full: "Königin Elizabeth Alexandra Mary Mountbatten-Windsor",
   });
 });
+
+test("parse full name", () => {
+  expect(parseName("Jochen Profit")).toEqual({
+    prefix: null,
+    first: "Jochen",
+    middle: null,
+    initials: null,
+    infix: null,
+    last: "Profit",
+    suffix: null,
+    full: "Königin Elizabeth Alexandra Mary Mountbatten-Windsor",
+  });
+});
