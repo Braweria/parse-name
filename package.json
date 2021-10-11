@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Parse names into categories.",
   "author": "Wiktoria Mielcarek <w.mielcarek@braweria.de> (http://github.com/braweria/)",
-  "main": "index.js",
-  "type":"module",
+  "main": "./dist/full-name-parser.js",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "start": "ts-node-dev --respawn lib/parse-name.ts",
