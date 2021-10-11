@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "start": "ts-node-dev --respawn lib/parse-name.ts",
+    "start": "ts-node-dev --respawn lib/full-name-parser.ts",
     "tsc": "tsc"
   },
   "keywords": [
