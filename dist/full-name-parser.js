@@ -47,9 +47,9 @@ const findNeedleInHaystack = (needles, haystack) => {
         const wordLength = sortedNeedles[i].length;
         for (let a = 0; a < haystack.length; a++) {
             if (haystack.substr(a, wordLength).toLowerCase() === sortedNeedles[i]) {
-                if (haystack[a - 1] === " " ||
-                    (haystack[a - 1] === undefined && haystack[wordLength] === " ") ||
-                    haystack[wordLength] === undefined) {
+                if ((haystack[a - 1] === " " && haystack[a + wordLength] === undefined) ||
+                    (haystack[a - 1] === undefined && haystack[a + wordLength] === " ") ||
+                    (haystack[a - 1] === " " && haystack[a + wordLength] === " ")) {
                     result = haystack.substr(a, wordLength);
                     found = true;
                     chopped = removeSpaces(haystack.replace(result, ""));
