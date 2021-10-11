@@ -1,6 +1,6 @@
-import { prefixes, infixes, suffixes } from "./helpers";
+import { prefixes, infixes, suffixes } from "./helpers.js";
 
-export function parseName(fullname: string): Person {
+function parseName(fullname: string): Person {
   const original = fullname;
   let prefix, first, initials, middle, infix, last, suffix;
 
@@ -23,6 +23,8 @@ export function parseName(fullname: string): Person {
 
   return parsedName;
 }
+
+export { parseName };
 
 export type Person = {
   prefix: typeof prefixes[number] | null;
