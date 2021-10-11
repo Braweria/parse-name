@@ -74,9 +74,9 @@ const findNeedleInHaystack = (
     for (let a = 0; a < haystack.length; a++) {
       if (haystack.substr(a, wordLength).toLowerCase() === sortedNeedles[i]) {
         if (
-          haystack[a - 1] === " " ||
-          (haystack[a - 1] === undefined && haystack[wordLength] === " ") ||
-          haystack[wordLength] === undefined
+          (haystack[a - 1] === " " && haystack[a + wordLength] === undefined) ||
+          (haystack[a - 1] === undefined && haystack[a + wordLength] === " ") ||
+          (haystack[a - 1] === " " && haystack[a + wordLength] === " ")
         ) {
           result = haystack.substr(a, wordLength);
           found = true;
