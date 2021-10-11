@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.suffixes = exports.infixes = exports.prefixes = void 0;
-exports.prefixes = [
+export const prefixes = [
     "frau",
     "fr.",
     "fr",
@@ -41,7 +38,7 @@ exports.prefixes = [
     "ms.",
 ];
 // https://de.wikipedia.org/wiki/Namenszusatz#Berufstitel
-exports.infixes = [
+export const infixes = [
     "von",
     "van",
     "von der",
@@ -65,7 +62,7 @@ exports.infixes = [
     "O'",
     "Mc",
 ];
-exports.suffixes = [
+export const suffixes = [
     "i",
     "ii",
     "iii",

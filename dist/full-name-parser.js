@@ -1,30 +1,26 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseName = void 0;
-var helpers_1 = require("./helpers");
+import { prefixes, infixes, suffixes } from "./helpers.js";
 function parseName(fullname) {
-    var _a, _b, _c, _d;
-    var original = fullname;
-    var prefix, first, initials, middle, infix, last, suffix;
-    var chopped = fullname;
-    _a = findNeedleInHaystack(helpers_1.prefixes, chopped), prefix = _a[0], chopped = _a[1];
-    _b = findNeedleInHaystack(helpers_1.infixes, chopped), infix = _b[0], chopped = _b[1];
-    _c = findNeedleInHaystack(helpers_1.suffixes, chopped), suffix = _c[0], chopped = _c[1];
-    _d = findName(chopped), first = _d[0], middle = _d[1], initials = _d[2], last = _d[3], chopped = _d[4];
-    var parsedName = {
-        prefix: prefix,
-        first: first,
-        middle: middle,
-        initials: initials,
-        infix: infix,
-        last: last,
-        suffix: suffix,
+    const original = fullname;
+    let prefix, first, initials, middle, infix, last, suffix;
+    let chopped = fullname;
+    [prefix, chopped] = findNeedleInHaystack(prefixes, chopped);
+    [infix, chopped] = findNeedleInHaystack(infixes, chopped);
+    [suffix, chopped] = findNeedleInHaystack(suffixes, chopped);
+    [first, middle, initials, last, chopped] = findName(chopped);
+    const parsedName = {
+        prefix,
+        first,
+        middle,
+        initials,
+        infix,
+        last,
+        suffix,
         full: original,
     };
     return parsedName;
 }
-exports.parseName = parseName;
-var sorting = function (a, b) {
+export { parseName };
+const sorting = (a, b) => {
     if (a.length < b.length) {
         return 1;
     }
@@ -33,23 +29,23 @@ var sorting = function (a, b) {
     }
     return 0;
 };
-var findNeedleInHaystack = function (needles, haystack) {
-    var sortedNeedles = needles.sort(sorting);
+const findNeedleInHaystack = (needles, haystack) => {
+    const sortedNeedles = needles.sort(sorting);
     if (!haystack) {
         return [null, haystack];
     }
-    var found = false;
-    var i = 0;
-    var result = null;
-    var chopped = haystack;
+    let found = false;
+    let i = 0;
+    let result = null;
+    let chopped = haystack;
     while (found === false) {
         if (i > sortedNeedles.length - 1) {
             result = null;
             found = true;
             break;
         }
-        var wordLength = sortedNeedles[i].length;
-        for (var a = 0; a < haystack.length; a++) {
+        const wordLength = sortedNeedles[i].length;
+        for (let a = 0; a < haystack.length; a++) {
             if (haystack.substr(a, wordLength).toLowerCase() === sortedNeedles[i]) {
                 if (haystack[a - 1] === " " ||
                     (haystack[a - 1] === undefined && haystack[wordLength] === " ") ||
@@ -65,21 +61,21 @@ var findNeedleInHaystack = function (needles, haystack) {
     }
     return [result, chopped];
 };
-var findName = function (haystack) {
-    var chopped = haystack;
-    var initialsRegex = /(\S\.\s{0,1})+/u;
-    var initials = null;
-    var first = null;
-    var middle = null;
-    var last = null;
+const findName = (haystack) => {
+    let chopped = haystack;
+    const initialsRegex = /(\S\.\s{0,1})+/u;
+    let initials = null;
+    let first = null;
+    let middle = null;
+    let last = null;
     if (chopped === null || haystack === null) {
         return [first, middle, initials, last, chopped];
     }
-    haystack.split(" ").forEach(function (hay, i, all) {
+    haystack.split(" ").forEach((hay, i, all) => {
         if (chopped === null) {
             return;
         }
-        var len = all.length - 1;
+        const len = all.length - 1;
         if (i === len) {
             last = hay;
             chopped = removeSpaces(chopped.replace(hay, ""));
@@ -102,4 +98,4 @@ var findName = function (haystack) {
     });
     return [first, middle, initials, last, chopped];
 };
-var removeSpaces = function (str) { return str.trim().replace("  ", " "); };
+const removeSpaces = (str) => str.trim().replace("  ", " ");
