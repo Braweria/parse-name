@@ -1,4 +1,4 @@
-import { parseName } from "../lib/parse-name";
+import { parseName } from "../lib/full-name-parser";
 
 test("parse full name", () => {
   expect(parseName("Frau Maria Höfer")).toEqual({
