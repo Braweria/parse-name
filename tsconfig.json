@@ -3,9 +3,11 @@
     "rootDir": "lib",
     "outDir": "dist",
     "strict": true,
-    "target": "es5"
+    "target": "es6",
+    "module": "es6",
+    "moduleResolution": "node",
   },
   "exclude": [
-    "node_modules", "jest.config.ts", "test/parse-name.test.ts"
+    "node_modules", "jest.config.ts", "test/full-name-parser.test.ts"
   ]
 }
