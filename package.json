@@ -1,10 +1,13 @@
 {
-  "name": "full-name-parser",
+  "name": "@braweria/full-name-parser",
   "version": "1.0.0",
   "description": "Parse names into categories.",
   "author": "Wiktoria Mielcarek <w.mielcarek@braweria.de> (http://github.com/braweria/)",
   "main": "./dist/full-name-parser.js",
   "type": "module",
+  "publishConfig": {
+    "@braweria:registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "test": "jest",
     "start": "ts-node-dev --respawn lib/full-name-parser.ts",
