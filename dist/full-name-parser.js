@@ -1,8 +1,11 @@
 import { prefixes, infixes, suffixes } from "./helpers.js";
 function parseName(fullname) {
+    if (typeof fullname !== "string") {
+        throw new Error("fullname must be a string");
+    }
     const original = fullname;
     let prefix, first, initials, middle, infix, last, suffix;
-    let chopped = fullname;
+    let chopped = fullname.replace(",", "").trim();
     [prefix, chopped] = findNeedleInHaystack(prefixes, chopped);
     [infix, chopped] = findNeedleInHaystack(infixes, chopped);
     [suffix, chopped] = findNeedleInHaystack(suffixes, chopped);
@@ -68,11 +71,11 @@ const findName = (haystack) => {
     let first = null;
     let middle = null;
     let last = null;
-    if (chopped === null || haystack === null) {
+    if (chopped === "" || haystack === "") {
         return [first, middle, initials, last, chopped];
     }
     haystack.split(" ").forEach((hay, i, all) => {
-        if (chopped === null) {
+        if (chopped === "" || haystack === "") {
             return;
         }
         const len = all.length - 1;
