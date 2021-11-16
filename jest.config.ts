@@ -1,4 +1,5 @@
 import type { Config } from "@jest/types";
+import { defaults } from "jest-config";
 
 /*
  * For a detailed explanation regarding each configuration property and type check, visit:
@@ -8,7 +9,8 @@ import type { Config } from "@jest/types";
 const config: Config.InitialOptions = {
   verbose: true,
   clearMocks: true,
-  collectCoverage: false,
+  collectCoverage: true,
+  moduleFileExtensions: [...defaults.moduleFileExtensions, "ts", "tsx"],
 };
 
 export default config;
