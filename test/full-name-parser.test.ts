@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { parseName } from "../lib/full-name-parser";
 
 test("parse Frau Maria Höfer", () => {
