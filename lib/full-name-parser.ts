@@ -1,10 +1,14 @@
-import { prefixes, infixes, suffixes } from "./helpers.js";
+import { prefixes, infixes, suffixes } from "./helpers";
 
 function parseName(fullname: string): Person {
+  if (typeof fullname !== "string") {
+    throw new Error("fullname must be a string");
+  }
+
   const original = fullname;
   let prefix, first, initials, middle, infix, last, suffix;
 
-  let chopped: string | null = fullname;
+  let chopped: string = fullname.replace(",", "").trim();
   [prefix, chopped] = findNeedleInHaystack(prefixes, chopped);
   [infix, chopped] = findNeedleInHaystack(infixes, chopped);
   [suffix, chopped] = findNeedleInHaystack(suffixes, chopped);
@@ -49,8 +53,8 @@ const sorting = (a: string, b: string) => {
 
 const findNeedleInHaystack = (
   needles: typeof prefixes[number][],
-  haystack: string | null
-) => {
+  haystack: string
+): [string | null, string] => {
   const sortedNeedles = needles.sort(sorting);
 
   if (!haystack) {
@@ -91,7 +95,9 @@ const findNeedleInHaystack = (
   return [result, chopped];
 };
 
-const findName = (haystack: string | null) => {
+const findName = (
+  haystack: string
+): [string | null, string | null, string | null, string | null, string] => {
   let chopped = haystack;
   const initialsRegex = /(\S\.\s{0,1})+/u;
 
@@ -100,12 +106,12 @@ const findName = (haystack: string | null) => {
   let middle: string | null = null;
   let last: string | null = null;
 
-  if (chopped === null || haystack === null) {
+  if (chopped === "" || haystack === "") {
     return [first, middle, initials, last, chopped];
   }
 
   haystack.split(" ").forEach((hay, i, all) => {
-    if (chopped === null) {
+    if (chopped === "" || haystack === "") {
       return;
     }
 
