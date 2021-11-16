@@ -1,18 +1,23 @@
 {
+  "extends": "ts-node/node12/tsconfig.json",
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+  },
   "compilerOptions": {
+    "baseUrl": ".",
     "rootDir": "lib",
     "outDir": "dist",
     "strict": true,
-    "target": "es6",
-    "module": "es6",
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
+    "typeRoots": ["./node_modules/@types", "./src/*.d.ts"],
   },
-  "exclude": [
-    "node_modules", "jest.config.ts", "test/full-name-parser.test.ts"
+  "include": [
+    "lib/**/*.ts",
   ],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "es6"
-    }
-  }
+  "exclude": [
+    "node_modules", "jest.config.ts", "test/full-name-parser.test.ts", "*.old.ts"
+  ],
 }
