@@ -1,4 +1,4 @@
-import { prefixes, infixes, suffixes } from "./helpers";
+import { prefixes, infixes, suffixes } from "./helpers.js";
 
 function parseName(fullname: string): Person {
   if (typeof fullname !== "string") {
