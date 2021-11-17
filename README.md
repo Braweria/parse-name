@@ -7,13 +7,13 @@ This is a simple name parser, that will chop a name into its components of _pref
 **With Yarn**
 
 ```
-yarn add full-name-parser
+yarn add @braweria/full-name-parser
 ```
 
 **With NPM**
 
 ```
-npm i full-name-parser
+npm i @braweria/full-name-parser
 ```
 
 ## Usage
