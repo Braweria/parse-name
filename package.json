@@ -1,10 +1,11 @@
 {
   "name": "@braweria/full-name-parser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Parse names into categories.",
   "author": "Wiktoria Mielcarek <w.mielcarek@braweria.de> (http://github.com/braweria/)",
   "main": "index.js",
   "type": "module",
+  "private": false,
   "publishConfig": {
     "@braweria:registry": "https://npm.pkg.github.com"
   },
