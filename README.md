@@ -16,12 +16,18 @@ yarn add @braweria/full-name-parser
 npm i @braweria/full-name-parser
 ```
 
+It's also available on the GitHub Packages registry.  
+
+```
+https://npm.pkg.github.com
+```
+
 ## Usage
 
 To use this library, just import `parseName` into your file, and immediatelly start using it!
 
 ```js
-import { parseName } from "full-name-parser";
+import { parseName } from "@braweria/full-name-parser";
 
 const parsedName = parseName("Prof. Steph Alice von Wolfenstein, III");
 console.log(parsedName);
